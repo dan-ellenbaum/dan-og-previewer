@@ -4,7 +4,10 @@
 # of scraping the og data from a 3rd part url
 # given as an argument to this job
 class FetchOgDataJob < ApplicationJob
+  include ActiveJob::Status
   queue_as :og_fetches
+
+  around_perform :update_job_status
 
   def perform(input_url)
     # TODO: Determine if we want to use fallback
@@ -14,5 +17,12 @@ class FetchOgDataJob < ApplicationJob
     # TODO: Save this to DB so the polling code
     # can grab the image when it is populated
     og.images
+  end
+
+  private
+
+  # Keep the DB updated with the status of the job
+  def update_job_status
+    # TODO: Write the ActiveJob::Status to DB here
   end
 end
