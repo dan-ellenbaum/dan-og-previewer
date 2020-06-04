@@ -4,7 +4,7 @@
 # of scraping the og data from a 3rd part url
 # given as an argument to this job
 class FetchOgDataJob < ApplicationJob
-  queue_as :default
+  queue_as :og_fetches
 
   def perform(input_url)
     # TODO: Determine if we want to use fallback
