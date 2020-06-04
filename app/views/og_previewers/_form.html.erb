@@ -1,22 +1,13 @@
-<%= form_with(model: og_previewer, local: true) do |form| %>
-  <% if og_previewer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(og_previewer.errors.count, "error") %> prohibited this og_previewer from being saved:</h2>
-
-      <ul>
-        <% og_previewer.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: og_previewer, remote: true, class: 'input-url-form') do |form| %>
+  <div id="error_explanation">
+  </div>
   <div class="field">
-    <%= form.label :input_url %>
-    <%= form.text_field :input_url %>
+    <%= form.text_field :input_url, :placeholder => 'Enter a URL here...' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Process URL' %>
   </div>
 <% end %>
+<div id='og_output'>
+</div>

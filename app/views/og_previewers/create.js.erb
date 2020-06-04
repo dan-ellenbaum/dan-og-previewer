@@ -1,0 +1,29 @@
+<% if @og_previewer.errors.any? %>
+    // This removes any error messages that were previously generated
+    $('#error_explanation').innerHTML = '';
+    $('#error_explanation').show();
+    $('#error_explanation').append("<h2><%= pluralize(@og_previewer.errors.count, "error") %> prohibited this from being processed:</h2>");
+    $('#error_explanation').append('<ul>');
+    <% @og_previewer.errors.full_messages.each do |message| %>
+      $('#error_explanation').append("<li><%= message %></li>");
+    <% end %>
+    $('#error_explanation').append('</ul>');
+<% else %>
+    $('#error_explanation').innerHTML = '';
+    $('#error_explanation').hide();
+    $('#og_output').append('Processing...');
+    // Start polling for when job completes
+    $(document).ready(function() {
+      intervalId = setInterval(function () {
+        $.ajax({
+          url: "<%= og_previewer_progress_path(og_previewer_id: @og_previewer.id, job_id: @og_previewer.job_id) %>",
+          method: 'GET',
+          dataType: 'html', //TODO: Check this and success                    
+          success: function(result) {
+            $('#og_output').html(result);
+          }
+        });
+      }, 1000);
+    });
+
+<% end %>

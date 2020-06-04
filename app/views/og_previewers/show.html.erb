@@ -4,15 +4,21 @@
   <strong>Input url:</strong>
   <%= @og_previewer.input_url %>
 </p>
-
-<p>
-  <strong>Og image url:</strong>
-  <%= @og_previewer.og_image_url %>
-</p>
-
 <p>
   <strong>Status:</strong>
   <%= @og_previewer.status %>
+</p>
+<p>
+  <strong>Og image url:</strong>
+  <%= @og_previewer.og_image_url %>
+  <% render partial: 'og_previewers/og_image', locals: {og_previewer: @og_previewer} %>
+  <% if @og_previewer.present?  %>
+    <% if @og_previewer.status == 'completed' %>
+      <img src="<%= @og_previewer.og_image_url %>">
+    <% else %>
+      <h3>Processing not completed successfully...</h3>
+    <% end %>
+  <% end %>
 </p>
 
 <%= link_to 'Back', og_previewers_path %>

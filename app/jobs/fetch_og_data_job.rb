@@ -20,7 +20,7 @@ class FetchOgDataJob < ApplicationJob
     og_preview_rec.update(job_id: job_id, status: status)
     og = OpenGraph.new(og_preview_rec.input_url, false)
     og_preview_rec.update(
-      og_image_url: og.images.first,
+      og_image_url: og&.images&.first,
       status: 'completed'
     )
   end

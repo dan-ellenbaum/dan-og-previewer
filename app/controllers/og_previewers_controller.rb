@@ -27,20 +27,10 @@ class OgPreviewersController < ApplicationController
     @og_previewer = OgPreviewer.new(og_previewer_params)
     respond_to do |format|
       if @og_previewer.save
-        FetchOgDataJob.perform_later(@og_previewer)
-        format.html do
-          redirect_to @og_previewer,
-                      notice: 'Processing URL...'
-        end
-        format.json do
-          render :show, status: :created, location: @og_previewer
-        end
-      else
-        format.html { render :new }
-        format.json do
-          render json: @og_previewer.errors, status: :unprocessable_entity
-        end
+        @current_job = FetchOgDataJob.perform_later(@og_previewer)
+        @og_previewer.update(job_id: @current_job.job_id)
       end
+      format.js
     end
   end
 
@@ -54,6 +44,17 @@ class OgPreviewersController < ApplicationController
                     notice: 'Og previewer was successfully destroyed.'
       end
       format.json { head :no_content }
+    end
+  end
+
+  def progress
+    # fetch job status
+    status = ActiveJob::Status.get(params[:job_id])
+    if status.completed?
+      @og_previewer = OgPreviewer.find(params[:og_previewer_id])
+      render partial: 'og_image', locals: { og_previewer: @og_previewer }
+    else
+      render html: 'Still Processing...'
     end
   end
 
