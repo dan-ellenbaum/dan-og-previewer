@@ -3,10 +3,10 @@
 # Use opengraph parser gem to perform the task
 # of scraping the og data from a 3rd part url
 # given as an argument to this job
-class GetOgDataJob < ApplicationJob
+class FetchOgDataJob < ApplicationJob
   queue_as :default
 
-  def perform(input_url: 'http://ogp.me')
+  def perform(input_url)
     # TODO: Determine if we want to use fallback
     # method in case of no og data on this url
     # for now, use "false" here to turn it off
