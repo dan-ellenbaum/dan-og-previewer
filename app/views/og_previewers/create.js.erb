@@ -14,16 +14,22 @@
     $('#og_output').append('Processing...');
     // Start polling for when job completes
     $(document).ready(function() {
-      intervalId = setInterval(function () {
+      $(function() {
+        setTimeout(getProgress, 250);
+      });
+      function getProgress() {
         $.ajax({
           url: "<%= og_previewer_progress_path(og_previewer_id: @og_previewer.id, job_id: @og_previewer.job_id) %>",
           method: 'GET',
-          dataType: 'html', //TODO: Check this and success                    
+          dataType: 'html',                   
           success: function(result) {
             $('#og_output').html(result);
+            if (result == 'Still Processing...') {
+              setTimeout(getProgress, 1000);
+            }
           }
         });
-      }, 1000);
+      }
     });
 
 <% end %>

@@ -51,6 +51,7 @@ class OgPreviewersController < ApplicationController
     # fetch job status
     status = ActiveJob::Status.get(params[:job_id])
     if status.completed?
+      # Only hit the DB if job is completed for efficiency
       @og_previewer = OgPreviewer.find(params[:og_previewer_id])
       render partial: 'og_image', locals: { og_previewer: @og_previewer }
     else
