@@ -6,7 +6,7 @@ RSpec.describe 'og_previewers/show', type: :view do
   before(:each) do
     @og_previewer = assign(
       :og_previewer, OgPreviewer.create!(
-                       input_url: 'Input Url',
+                       input_url: 'http://apple.com',
                        og_image_url: 'Og Image Url',
                        job_id: 'Job',
                        status: 'Status'
@@ -16,7 +16,7 @@ RSpec.describe 'og_previewers/show', type: :view do
 
   it 'renders attributes in <p>' do
     render
-    expect(rendered).to match(/Input Url/)
+    expect(rendered).to match(%r{http\://apple\.com})
     expect(rendered).to match(/Og Image Url/)
     expect(rendered).to match(/Job/)
     expect(rendered).to match(/Status/)

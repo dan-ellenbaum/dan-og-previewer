@@ -1,6 +1,6 @@
 <% if @og_previewer.errors.any? %>
     // This removes any error messages that were previously generated
-    $('#error_explanation').innerHTML = '';
+    $('#error_explanation').empty();
     $('#error_explanation').show();
     $('#error_explanation').append("<h2><%= pluralize(@og_previewer.errors.count, "error") %> prohibited this from being processed:</h2>");
     $('#error_explanation').append('<ul>');
@@ -9,7 +9,7 @@
     <% end %>
     $('#error_explanation').append('</ul>');
 <% else %>
-    $('#error_explanation').innerHTML = '';
+    $('#error_explanation').empty();
     $('#error_explanation').hide();
     $('#og_output').append('Processing...');
     // Start polling for when job completes

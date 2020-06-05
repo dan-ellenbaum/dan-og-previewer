@@ -31,7 +31,7 @@ RSpec.describe '/og_previewers', type: :request do
     {
       email: 'dan.ellenbaum@gmail.com',
       user_id: 123,
-      input_url: nil
+      input_url: 'not_a_url'
     }
   end
 
