@@ -21,8 +21,6 @@ class OgPreviewersController < ApplicationController
     @og_previewer = OgPreviewer.new
   end
 
-  # POST /og_previewers
-  # POST /og_previewers.json
   def create
     @og_previewer = OgPreviewer.new(og_previewer_params)
     respond_to do |format|
@@ -47,6 +45,8 @@ class OgPreviewersController < ApplicationController
     end
   end
 
+  # Receive the polling to check status of the job
+  # when it is complete, render a partial to display resulting image
   def progress
     # fetch job status
     status = ActiveJob::Status.get(params[:job_id])
