@@ -1,11 +1,13 @@
 <% if og_previewer.present?  %>
-  <% if og_previewer.status == 'completed' %>
-    <% if og_previewer.og_image_url.present? %>
-      <img src="<%= og_previewer.og_image_url %>">
+  <div class='og_image_container'>
+    <% if og_previewer.status == 'completed' %>
+      <% if og_previewer.og_image_url.present? %>
+        <img src="<%= og_previewer.og_image_url %>">
+      <% else %>
+          <h3>No image retrieved</h3>
+      <% end %>
     <% else %>
-        <h3>No image retrieved</h3>
+      <h3>Processing...</h3>
     <% end %>
-  <% else %>
-    <h3>Processing...</h3>
-  <% end %>
+  </div>
 <% end %>

@@ -30,16 +30,6 @@ class OgPreviewersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get edit' do
-    get edit_og_previewer_url(@og_previewer)
-    assert_response :success
-  end
-
-  test 'should update og_previewer' do
-    patch og_previewer_url(@og_previewer), params: { og_previewer: { input_url: @og_previewer.input_url, job_id: @og_previewer.job_id, og_image_url: @og_previewer.og_image_url, status: @og_previewer.status } }
-    assert_redirected_to og_previewer_url(@og_previewer)
-  end
-
   test 'should destroy og_previewer' do
     assert_difference('OgPreviewer.count', -1) do
       delete og_previewer_url(@og_previewer)
