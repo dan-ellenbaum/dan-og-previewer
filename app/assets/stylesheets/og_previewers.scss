@@ -1,0 +1,9 @@
+// Place all the styles related to the OgPreviewers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.og_image_container {
+  img { 
+    max-width: 300px;
+    border: 1px solid black;
+  }
+}

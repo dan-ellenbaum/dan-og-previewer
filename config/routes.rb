@@ -1,3 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :test_og_previewers
+  resources :og_previewers, only: %i[index show new create destroy] do
+    get 'progress' => 'og_previewers#progress'
+  end
+
+  root to: 'og_previewers#new'
 end

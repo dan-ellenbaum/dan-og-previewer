@@ -1,0 +1,13 @@
+<%= form_with(model: og_previewer, remote: true, class: 'input-url-form') do |form| %>
+  <div id="error_explanation">
+  </div>
+  <div class="field">
+    <%= form.text_field :input_url, :placeholder => 'Enter a URL here...' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Process URL' %>
+  </div>
+<% end %>
+<div id='og_output'>
+</div>
