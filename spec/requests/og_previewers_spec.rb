@@ -62,7 +62,7 @@ RSpec.describe '/og_previewers', type: :request do
     context 'with valid parameters' do
       it 'creates a new OgPreviewer' do
         post og_previewers_url, xhr: true, params: { og_previewer: valid_attributes }
-        expect(response.body.include?("('#og_output').append('Processing...')")).to eq(true)
+        expect(response.body.include?("('#og_output').html('Processing...')")).to eq(true)
       end
     end
 
