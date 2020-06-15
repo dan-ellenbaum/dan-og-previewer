@@ -45,12 +45,17 @@ Ruby installed. Then simply do "gem install X" for each of the
 3rd party gems (see below).
 * Ruby/Rails versions
 ruby 2.7.1p83 (2020-03-31 revision a0c7c23c9c) [x86_64-darwin18]
-Rails 6.0.3.1
+
+* Rails 6.0.3.1
+
 DB is Postgres to match DocSend
-3rd party gems
-  opengraph_parser - Used to handle calling 3rd party websites and parsing
+
+* 3rd party gems
+
+opengraph_parser - Used to handle calling 3rd party websites and parsing
     out the Open Graph data
-  activejob-status - Used to check the status of Jobs more easily
+
+activejob-status - Used to check the status of Jobs more easily
 
 It was noted that Postgres was already in use so just run basic
 commands:
